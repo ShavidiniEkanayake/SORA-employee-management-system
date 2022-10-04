@@ -14,29 +14,36 @@ public class employeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    //add employee
     @GetMapping("/getAllEmployee")
     public List<EmployeeDTO> getAllEmployee(){
         return employeeService.getAllEmployee();
     }
 
+    //read all employee details
     @PostMapping("/saveEmployee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO){
         return employeeService.saveEmployee(employeeDTO);
     }
 
+    //update employee details
     @PutMapping("/updateEmployee/{id}")
     public String updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable int id){
         return employeeService.updateEmployee(id,employeeDTO);
     }
 
+    //delete employee
     @DeleteMapping("/deleteEmployee/{id}")
     public String deleteEmployee(@PathVariable("id") int id){
         return employeeService.deleteEmployee(id);
     }
 
-    @GetMapping("/getEmployeeByUserId/{id}")
-    public EmployeeDTO getUserByUserID(@PathVariable String id){
-        return employeeService.getEmployeeByUserID(id);
+    //get one of the employee details
+    @GetMapping("/getEmployeeByID/{id}")
+    public EmployeeDTO getEmployeeByID(@PathVariable String id){
+        return employeeService.getEmployeeByID(id);
     }
+
+    //get next id(API for autoincrement id)
 
 }

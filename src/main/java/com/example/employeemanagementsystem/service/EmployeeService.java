@@ -24,16 +24,19 @@ public class EmployeeService {
     @Autowired
     private ModelMapper modelMapper;
 
+    //add employee
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO){
         employeeRepo.save(modelMapper.map(employeeDTO, Employee.class));
         return employeeDTO;
     }
 
+    //read all employee details
     public List<EmployeeDTO> getAllEmployee(){
         List<Employee>employeeList= employeeRepo.findAll();
         return modelMapper.map(employeeList, new TypeToken<List<EmployeeDTO>>(){}.getType());
     }
 
+    //update employee details
     public String updateEmployee(int id,EmployeeDTO employeeDTO){
         Optional<Employee> employee = employeeRepo.findById(id);
         if(employee.isPresent()) {
@@ -44,6 +47,7 @@ public class EmployeeService {
         }
     }
 
+    //delete employee
     public String deleteEmployee(int id){
         Optional<Employee> employee = employeeRepo.findById(id);
         if(employee.isPresent()) {
@@ -54,8 +58,11 @@ public class EmployeeService {
         }
     }
 
-    public EmployeeDTO getEmployeeByUserID(String id){
-        Employee employee=employeeRepo.getEmployeeByUserID(id);
+    //get one of the employee details
+    public EmployeeDTO getEmployeeByID(String id){
+        Employee employee=employeeRepo.getEmployeeByID(id);
         return modelMapper.map(employee,EmployeeDTO.class);
     }
+
+    //get next id(API for autoincrement id)
 }
