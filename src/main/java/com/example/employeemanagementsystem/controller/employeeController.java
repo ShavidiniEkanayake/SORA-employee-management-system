@@ -25,13 +25,18 @@ public class employeeController {
     }
 
     @PutMapping("/updateEmployee/{id}")
-    public void updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable int id){
-        employeeService.updateEmployee(id,employeeDTO);
+    public String updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable int id){
+        return employeeService.updateEmployee(id,employeeDTO);
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
     public String deleteEmployee(@PathVariable("id") int id){
         return employeeService.deleteEmployee(id);
+    }
+
+    @GetMapping("/getEmployeeByUserId/{id}")
+    public EmployeeDTO getUserByUserID(@PathVariable String id){
+        return employeeService.getEmployeeByUserID(id);
     }
 
 }

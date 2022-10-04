@@ -34,8 +34,14 @@ public class EmployeeService {
         return modelMapper.map(employeeList, new TypeToken<List<EmployeeDTO>>(){}.getType());
     }
 
-    public void updateEmployee(int id,EmployeeDTO employeeDTO){
-
+    public String updateEmployee(int id,EmployeeDTO employeeDTO){
+        Optional<Employee> employee = employeeRepo.findById(id);
+        if(employee.isPresent()) {
+            employeeRepo.save(modelMapper.map(employeeDTO, Employee.class));
+            return "Employee is updated";
+        }else {
+            throw new RuntimeException("Employee not found for the id "+id);
+        }
     }
 
     public String deleteEmployee(int id){
@@ -46,9 +52,10 @@ public class EmployeeService {
         }else {
             throw new RuntimeException("Employee not found for the id "+id);
         }
-//        Employee employeeById = employeeRepo.getEmployeeById(id);
-//        employeeRepo.delete(modelMapper.map(employeeById,Employee.class));
-//        employeeList = employeeList.stream().filter(employeeDTO-> employeeDTO.getId()!=id).
-//                collect(Collectors.toList());
+    }
+
+    public EmployeeDTO getEmployeeByUserID(String id){
+        Employee employee=employeeRepo.getEmployeeByUserID(id);
+        return modelMapper.map(employee,EmployeeDTO.class);
     }
 }

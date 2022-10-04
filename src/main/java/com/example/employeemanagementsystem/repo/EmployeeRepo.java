@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface EmployeeRepo extends JpaRepository<Employee,Integer> {
 
-//    @Query(value = "DELETE FROM Employee WHERE id=?",nativeQuery = true)
-//    Employee getEmployeeById(int employeeId);
+    @Query(value = "SELECT * FROM USER WHERE ID = ?1",nativeQuery = true)
+    Employee getEmployeeByUserID(String userId);
 }
