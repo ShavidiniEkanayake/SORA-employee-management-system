@@ -15,6 +15,5 @@ public class EmployeeManagementSystemApplication {
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
-
     }
 }
