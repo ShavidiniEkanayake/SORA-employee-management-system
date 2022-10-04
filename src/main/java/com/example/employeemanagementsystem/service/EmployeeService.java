@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,9 +38,17 @@ public class EmployeeService {
 
     }
 
-    public void deleteEmployee(int id){
-//        employeeRepo.delete(modelMapper.map(id,Employee.class));
-        employeeList = employeeList.stream().filter(employeeDTO-> employeeDTO.getId()!=id).
-                collect(Collectors.toList());
+    public String deleteEmployee(int id){
+        Optional<Employee> employee = employeeRepo.findById(id);
+        if(employee.isPresent()) {
+            employeeRepo.delete(employee.get());
+            return "Employee is deleted with id "+id;
+        }else {
+            throw new RuntimeException("Employee not found for the id "+id);
+        }
+//        Employee employeeById = employeeRepo.getEmployeeById(id);
+//        employeeRepo.delete(modelMapper.map(employeeById,Employee.class));
+//        employeeList = employeeList.stream().filter(employeeDTO-> employeeDTO.getId()!=id).
+//                collect(Collectors.toList());
     }
 }
