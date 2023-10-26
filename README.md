@@ -1,2 +1,7 @@
 # SORA-employee-management-system - Backend
-This is for Digiratina Technology Solutions assignment
+This is for employee mgt system backend.
+
+## Technologies
+
+1. Java
+2. SpringBoot
